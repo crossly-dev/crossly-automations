@@ -1,0 +1,21 @@
+{
+  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "schemaVersion": 1,
+  "name": "Discount stale listings 5% weekly",
+  "description": "Every Sunday at noon, drops the price 5% on any listing that's been sitting between 30 and 180 days without a sale. Most platforms surface price-drop notifications to people who liked the item, which is a free traffic bump.",
+  "trigger": {
+    "type": "schedule.cron",
+    "config": { "cron": "0 12 * * 0", "timezone": "America/New_York" }
+  },
+  "condition": {
+    "type": "listing.age_range",
+    "config": { "minDays": 30, "maxDays": 180 }
+  },
+  "action": {
+    "type": "listing.price_drop",
+    "config": { "mode": "percent", "percent": 5 }
+  },
+  "metadata": {
+    "tags": ["multi", "stale", "price-drop", "weekly"]
+  }
+}

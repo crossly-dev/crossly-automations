@@ -1,0 +1,18 @@
+{
+  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "schemaVersion": 1,
+  "name": "Share closet 9 AM (Poshmark)",
+  "description": "Shares every active listing in your Poshmark closet every weekday morning. The cron is in Eastern time — change the timezone to your own if you're elsewhere.",
+  "trigger": {
+    "type": "schedule.cron",
+    "config": { "cron": "0 9 * * 1-5", "timezone": "America/New_York" }
+  },
+  "action": {
+    "type": "listing.share_closet",
+    "config": {}
+  },
+  "platforms": ["poshmark"],
+  "metadata": {
+    "tags": ["poshmark", "share", "daily", "morning"]
+  }
+}

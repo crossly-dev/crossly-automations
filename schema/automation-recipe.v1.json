@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "$id": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "title": "Crossly Automation Recipe (v1)",
+  "description": "Portable JSON shape for an automation rule. Used by the /api/automation/rules/import endpoint and the github.com/alphajew420/crossly-automations community library. Trigger / action / condition `type` values must match an entry in the live catalog at /api/automation/catalog.",
+  "type": "object",
+  "required": ["schemaVersion", "name", "trigger", "action"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Optional self-reference to this schema URL."
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "enum": [1],
+      "description": "Recipe schema version. Bumped only on breaking changes."
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Human-readable name shown in the import preview and rules list."
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Optional long-form description."
+    },
+    "trigger": { "$ref": "#/$defs/step" },
+    "condition": {
+      "oneOf": [
+        { "$ref": "#/$defs/step" },
+        { "type": "null" }
+      ],
+      "description": "Optional condition gate. Omit, or set type to 'none', to fire on every trigger."
+    },
+    "action": { "$ref": "#/$defs/step" },
+    "platforms": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Optional platform scope. When set, the rule only acts on listings/conversations on these platforms."
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Community-library metadata. Server ignores; UI may render.",
+      "properties": {
+        "author": { "type": "string" },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "step": {
+      "type": "object",
+      "required": ["type"],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Dotted catalog id, e.g. 'schedule.cron', 'listing.share_closet'."
+        },
+        "config": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Type-specific configuration. Shape defined per trigger/action/condition in the catalog."
+        }
+      }
+    }
+  }
+}

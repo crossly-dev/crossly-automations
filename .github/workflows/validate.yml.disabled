@@ -1,0 +1,52 @@
+name: Validate recipes
+
+on:
+  pull_request:
+    paths:
+      - 'recipes/**/*.json'
+      - 'schema/**'
+      - 'scripts/**'
+      - 'package.json'
+  push:
+    branches: [main]
+
+jobs:
+  schema:
+    name: Schema validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm install --no-audit --no-fund
+      - name: Run validator on every recipe
+        run: npm run validate
+
+  catalog:
+    name: Live-catalog check (best-effort)
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: POST each recipe to /validate-recipe
+        run: |
+          set -e
+          fail=0
+          for f in $(find recipes -name '*.json'); do
+            echo "→ $f"
+            body=$(cat "$f")
+            resp=$(curl -sS -X POST \
+              -H 'Content-Type: application/json' \
+              -d "$body" \
+              https://crossly.shinbetsolutions.com/api/automation/rules/validate-recipe \
+              || echo '{}')
+            valid=$(echo "$resp" | jq -r '.valid // false')
+            if [ "$valid" != "true" ]; then
+              echo "  ✖ catalog validation failed"
+              echo "$resp" | jq .
+              fail=1
+            else
+              echo "  ✔ catalog ok"
+            fi
+          done
+          exit $fail

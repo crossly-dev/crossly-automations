@@ -1,0 +1,18 @@
+{
+  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "schemaVersion": 1,
+  "name": "Send 10% offer to anyone who likes",
+  "description": "Whenever a buyer likes one of your Poshmark listings, send them a 10% offer with free shipping. Bumps conversion meaningfully on items that have been sitting.",
+  "trigger": {
+    "type": "listing.liked",
+    "config": { "platforms": ["poshmark"] }
+  },
+  "action": {
+    "type": "listing.send_offer_to_likers",
+    "config": { "discountPercent": 10, "shippingFree": true, "minLikeCount": 1 }
+  },
+  "platforms": ["poshmark"],
+  "metadata": {
+    "tags": ["poshmark", "offers", "conversion"]
+  }
+}

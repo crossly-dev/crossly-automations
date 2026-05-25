@@ -1,0 +1,16 @@
+{
+  "name": "crossly-automations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Community-maintained automation recipes for Crossly. Drop-in JSON files importable via the web app or /api/automation/rules/import.",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate.mjs recipes/**/*.json",
+    "validate:one": "node scripts/validate.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  },
+  "license": "MIT"
+}

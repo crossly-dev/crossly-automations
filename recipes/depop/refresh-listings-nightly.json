@@ -1,0 +1,18 @@
+{
+  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "schemaVersion": 1,
+  "name": "Auto-relist stale Depop listings nightly",
+  "description": "Every night at 2 AM Eastern, delists + republishes any Depop listing that has been sitting for 14+ days. Depop's algorithm rewards newly-published listings — relisting bumps stale items back to the top of search.",
+  "trigger": {
+    "type": "schedule.cron",
+    "config": { "cron": "0 2 * * *", "timezone": "America/New_York" }
+  },
+  "action": {
+    "type": "listing.auto_relist",
+    "config": { "platforms": ["depop"], "minDaysListed": 14, "copyPhotos": true }
+  },
+  "platforms": ["depop"],
+  "metadata": {
+    "tags": ["depop", "relist", "nightly", "algorithm"]
+  }
+}

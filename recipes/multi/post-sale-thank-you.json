@@ -1,0 +1,19 @@
+{
+  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "schemaVersion": 1,
+  "name": "Send thank-you message on every sale",
+  "description": "When any item sells on any connected platform, send the buyer a short thank-you note. Works across Poshmark, Mercari, Depop, Grailed, Vinted and any other platform whose recipe supports inbox.send_message.",
+  "trigger": {
+    "type": "listing.sold",
+    "config": {}
+  },
+  "action": {
+    "type": "inbox.send_message",
+    "config": {
+      "template": "Thanks so much for the order! Packing it up today — you'll have tracking by tonight."
+    }
+  },
+  "metadata": {
+    "tags": ["multi", "thank-you", "post-sale", "messaging"]
+  }
+}
