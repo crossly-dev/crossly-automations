@@ -1,10 +1,10 @@
 # crossly-automations — community recipe library
 
-Drop-in automation recipes for [Crossly](https://crossly.shinbetsolutions.com).
+Drop-in automation recipes for [Crossly](https://crossly.net).
 Each `.json` file is a portable recipe — paste it into the **Import** dialog at
 `/automation`, or POST it to `/api/automation/rules/import`. No code, no setup.
 
-Live demo: <https://crossly.shinbetsolutions.com>
+Live demo: <https://crossly.net>
 Schema reference: [`schema/automation-recipe.v1.json`](./schema/automation-recipe.v1.json)
 
 ---
@@ -29,7 +29,7 @@ condition, action, and platform list at a glance.
 ## Using a recipe
 
 **From the web app** (easiest):
-1. Open [`/automation`](https://crossly.shinbetsolutions.com/automation)
+1. Open [`/automation`](https://crossly.net/automation)
 2. Click **Import**
 3. Paste the JSON or upload the `.json` file
 4. Click **Validate** → review → **Import**
@@ -37,7 +37,7 @@ condition, action, and platform list at a glance.
 
 **From the API** (for agents, scripts, CI):
 ```bash
-curl -X POST https://crossly.shinbetsolutions.com/api/automation/rules/import \
+curl -X POST https://crossly.net/api/automation/rules/import \
   -H "Authorization: Bearer $CROSSLY_PAT" \
   -H "Content-Type: application/json" \
   -d @recipes/poshmark/share-closet-9am.json
@@ -67,7 +67,7 @@ called in your head. `share-closet-9am.json` ≫ `my-morning-thing.json`.
 
 ```jsonc
 {
-  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "$schema": "https://crossly.net/schemas/automation-recipe.v1.json",
   "schemaVersion": 1,
   "name": "Share closet 9 AM",            // shown in the import preview
   "description": "Optional longer blurb",
@@ -91,8 +91,14 @@ called in your head. `share-closet-9am.json` ≫ `my-morning-thing.json`.
 }
 ```
 
-Trigger / action / condition `type` values come from the live catalog:
-<https://crossly.shinbetsolutions.com/api/automation/catalog>
+Trigger / action / condition `type` values come from the live catalog. Read it
+with your API key (Settings → API on crossly.net):
+
+```bash
+curl https://crossly.net/api/v1/automation/catalog -H "Authorization: Bearer $CROSSLY_API_KEY"
+```
+
+or browse it in the app at [`/automation`](https://crossly.net/automation).
 
 If your recipe uses a trigger or action that isn't in the catalog yet, open
 an issue in the main `crossly` repo first — the recipe will be blocked from

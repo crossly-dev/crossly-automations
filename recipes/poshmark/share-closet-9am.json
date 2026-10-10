@@ -1,5 +1,5 @@
 {
-  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "$schema": "https://crossly.net/schemas/automation-recipe.v1.json",
   "schemaVersion": 1,
   "name": "Share closet 9 AM (Poshmark)",
   "description": "Shares every active listing in your Poshmark closet every weekday morning. The cron is in Eastern time — change the timezone to your own if you're elsewhere.",

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft-07/schema#",
-  "$id": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "$id": "https://crossly.net/schemas/automation-recipe.v1.json",
   "title": "Crossly Automation Recipe (v1)",
-  "description": "Portable JSON shape for an automation rule. Used by the /api/automation/rules/import endpoint and the github.com/alphajew420/crossly-automations community library. Trigger / action / condition `type` values must match an entry in the live catalog at /api/automation/catalog.",
+  "description": "Portable JSON shape for an automation rule. Used by the /api/automation/rules/import endpoint and the github.com/crossly-dev/crossly-automations community library. Trigger / action / condition `type` values must match an entry in the live catalog at /api/automation/catalog.",
   "type": "object",
   "required": ["schemaVersion", "name", "trigger", "action"],
   "additionalProperties": false,

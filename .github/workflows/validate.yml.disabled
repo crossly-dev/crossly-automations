@@ -38,7 +38,7 @@ jobs:
             resp=$(curl -sS -X POST \
               -H 'Content-Type: application/json' \
               -d "$body" \
-              https://crossly.shinbetsolutions.com/api/automation/rules/validate-recipe \
+              https://crossly.net/api/automation/rules/validate-recipe \
               || echo '{}')
             valid=$(echo "$resp" | jq -r '.valid // false')
             if [ "$valid" != "true" ]; then

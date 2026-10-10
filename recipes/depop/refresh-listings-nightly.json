@@ -1,5 +1,5 @@
 {
-  "$schema": "https://crossly.shinbetsolutions.com/schemas/automation-recipe.v1.json",
+  "$schema": "https://crossly.net/schemas/automation-recipe.v1.json",
   "schemaVersion": 1,
   "name": "Auto-relist stale Depop listings nightly",
   "description": "Every night at 2 AM Eastern, delists + republishes any Depop listing that has been sitting for 14+ days. Depop's algorithm rewards newly-published listings — relisting bumps stale items back to the top of search.",
